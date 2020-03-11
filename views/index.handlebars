@@ -1,0 +1,61 @@
+<h1>Burger Planner</h1>
+
+
+<h1> Display Burger to devour</h1>
+
+<ul>
+  {{#each output}}
+  {{#unless devoured }}
+  <li>
+    <p>
+      {{id}}. {{name}}
+      <!-- id saves id in data-plan-->
+      <button data-burgerid="{{this.id}}" class="delburger">Devour it!</button>
+    </p>
+  </li>
+  {{/unless}}
+  {{/each}}
+</ul>
+
+<h1>Devoured __ True --- Burger </h1>
+
+<ul>
+  {{#each output}}
+  {{#if devoured }}
+  <li>
+    <p>
+      {{id}}. {{name}}
+    </p>
+  </li>
+  {{/if}}
+  {{/each}}
+</ul>
+
+<!--- form to add burgers --->
+<h1> form </h1>
+
+<form id="addForm">
+  <input type="text" id="burgerId">
+  <button id="addBtn"> Submit </button>
+  <p>Enter a burger you want to eat and click on submit </p>
+</form>
+
+<script>
+
+  $("#addBtn").on("click", function (event) {
+    event.preventDefault();
+    const newBurger = {
+      name: $("#burgerId").val().trim();
+    }
+    $.ajax({
+      url: "api/burgers/",
+      type: "POST",
+      data: newBurger
+    }).then(function () {
+        console.log("Your burger was added");
+      });
+  })
+
+  // handle the update to devour option
+
+</script>
