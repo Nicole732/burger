@@ -1,61 +1,101 @@
-<h1>Burger Planner</h1>
+
+<div class="container">
+  {{!-- Header --}}
+  <div class="row"> 
+      <img src="/assets/images/burger350.jpg" alt="burger"> 
+      </br>
+       <h1 class="main-title"> Eat-da-Burger </h1> 
+  
+  </div>
+
+  
+  {{!-- Devoured and non devoured columns --}}
+  <div class="row">
+
+      <div class="col">  
+        <p> Display Burger to devour</p>
+        <ul>
+            {{#each output}}
+            {{#unless devoured }}
+
+            <li>
+              
+                {{id}}. {{burger}}
+                <!-- id saves id in data-plan-->
+              
+              <button data-burgerid="{{this.id}}" class="delburger btn btn-light" type="button">Devour it!</button>
+            </li>
+
+            {{/unless}}
+            {{/each}}
+        </ul>
+
+      </div>
 
 
-<h1> Display Burger to devour</h1>
+      <div class="col"> 
 
-<ul>
-  {{#each output}}
-  {{#unless devoured }}
-  <li>
-    <p>
-      {{id}}. {{name}}
-      <!-- id saves id in data-plan-->
-      <button data-burgerid="{{this.id}}" class="delburger">Devour it!</button>
-    </p>
-  </li>
-  {{/unless}}
-  {{/each}}
-</ul>
+       <p> Display Devoured Burgers</p>
+          <ul>
+            {{#each output}}
+            {{#if devoured }}
+            <li>
+              <p>
+                {{id}}. {{burger}}
+              </p>
+            </li>
+            {{/if}}
+            {{/each}}
+          </ul>
+      </div>
+  </div>
+  {{!--  burger submit form --}}
+  <div class="row">
+      <form id="addBurger" class="button-size">
+          <textarea type="text" name="burger"></textarea>
+          </br>
+          <button type="submit" class="btn btn-primary"> Submit </button>
+          <p>Enter a burger you want to eat and click on submit </p>
+      </form>
+  </div>
 
-<h1>Devoured __ True --- Burger </h1>
+</div>
 
-<ul>
-  {{#each output}}
-  {{#if devoured }}
-  <li>
-    <p>
-      {{id}}. {{name}}
-    </p>
-  </li>
-  {{/if}}
-  {{/each}}
-</ul>
 
-<!--- form to add burgers --->
-<h1> form </h1>
-
-<form id="addForm">
-  <input type="text" id="burgerId">
-  <button id="addBtn"> Submit </button>
-  <p>Enter a burger you want to eat and click on submit </p>
-</form>
 
 <script>
 
-  $("#addBtn").on("click", function (event) {
+  $("#addBurger").on("submit", function (event) {
     event.preventDefault();
     const newBurger = {
-      name: $("#burgerId").val().trim();
+      burger: $("#addBurger [name=burger]").val().trim()
     }
+    console.log(newBurger)
     $.ajax({
-      url: "api/burgers/",
+      url: "/api/burgers",
       type: "POST",
       data: newBurger
     }).then(function () {
         console.log("Your burger was added");
+        location.reload();
       });
   })
 
-  // handle the update to devour option
+  // handle the update to devoured option
+
+  $(".delburger").on("click", function(event){
+    
+
+    const newid = $(this).data("burgerid");
+
+  
+    $.ajax({
+      url: "/api/burgers/" + newid,
+      type: "PUT"
+    }).then(function(){
+      console.log("updated id", newid);
+      location.reload();
+    });
+  })
 
 </script>
