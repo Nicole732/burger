@@ -1,65 +1,62 @@
 
-<div class="container">
+
   {{!-- Header --}}
-  <div class="row"> 
-      <img src="/assets/images/burger350.jpg" alt="burger"> 
-      </br>
-       <h1 class="main-title"> Eat-da-Burger </h1> 
-  
+  <div class="text-center pb-3" > 
+      <img src="/assets/images/burger.png" class="mx-auto d-block" alt="burger">
+
+      <p>
+        <h1 class="main-title text-center"> Eat-da-Burger! </h1>
+      <p>
   </div>
 
-  
-  {{!-- Devoured and non devoured columns --}}
-  <div class="row">
+  <div class="container mx-auto text-center">
+     {{!-- Devoured and non devoured columns --}}
+    <div class="row">
 
-      <div class="col">  
-        <p> Display Burger to devour</p>
-        <ul>
-            {{#each output}}
-            {{#unless devoured }}
+        <div class="col-md-5">  
 
-            <li>
+                     {{#each output}}
+                    {{#unless devoured }}
+
+                
+                    
+
+                      <p class="bg-light mb-3 p-3 w-100 text-left">  <span class="px-4"> {{id}}. {{burger}}  </span>  
+             
               
-                {{id}}. {{burger}}
-                <!-- id saves id in data-plan-->
-              
-              <button data-burgerid="{{this.id}}" class="delburger btn btn-light" type="button">Devour it!</button>
-            </li>
+                  <!-- id saves id in data-plan-->
+                       <button data-burgerid="{{this.id}}" class="delburger btn btn-outline-dark" type="button">Devour it!</button>
+                   </p> 
+              {{/unless}}
+              {{/each}}
+           
+        </div>
 
-            {{/unless}}
-            {{/each}}
-        </ul>
-
-      </div>
-
-
-      <div class="col"> 
-
-       <p> Display Devoured Burgers</p>
-          <ul>
-            {{#each output}}
-            {{#if devoured }}
-            <li>
-              <p>
-                {{id}}. {{burger}}
-              </p>
-            </li>
-            {{/if}}
-            {{/each}}
-          </ul>
-      </div>
+        <div class="col-md-5"> 
+            
+              {{#each output}}
+              {{#if devoured }}
+          
+               <p class="bg-light m-1 p-3 w-100 text-muted text-left"> 
+                    {{id}}. {{burger}}
+                </p>
+            
+              {{/if}}
+              {{/each}}
+            
+        </div>
+    </div>
+    {{!--  burger submit form --}}
+    <div class="text-center pb-3" > 
+        <form id="addBurger">
+            <textarea type="text" name="burger" class="col-md-5" rows="3"></textarea>
+            </br>
+            <button type="submit" class="btn btn-primary"> Submit </button>
+            
+            <p>Enter a burger you want to eat. Click the "Submit" button. </p>
+        </form>
+    </div>
   </div>
-  {{!--  burger submit form --}}
-  <div class="row">
-      <form id="addBurger" class="button-size">
-          <textarea type="text" name="burger"></textarea>
-          </br>
-          <button type="submit" class="btn btn-primary"> Submit </button>
-          <p>Enter a burger you want to eat and click on submit </p>
-      </form>
-  </div>
-
-</div>
 
 
 
