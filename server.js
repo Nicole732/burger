@@ -15,12 +15,8 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
-
-
 
 if (process.env.JAWSDB_URL) {
 
@@ -88,15 +84,6 @@ app.put("/api/burgers/:id", function(req, res){
   
   })
 })
-
-
-
-
-
-
-
-
-
 
 app.listen(PORT, function(){
     // Log (server-side) when our server has started
