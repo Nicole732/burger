@@ -7,7 +7,7 @@
 
 This app creates a burger logger with MySQL, Node, Express, and  Handlebars. 
 We use MySQL to query, the server to route data in the app, and Handlebars to generate your HTML.
-The deployed application is available at: https://serene-sands-87586.herokuapp.com/.
+The deployed application is available at: https://frozen-waters-41961.herokuapp.com/.
 
 ## Table of Content
 
